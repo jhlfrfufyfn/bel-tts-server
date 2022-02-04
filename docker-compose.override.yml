@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/data/db
+    ports:
+      - 5432:5432
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file: .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./src:/app/src
+    external_links:
+      - postgres
+    depends_on:
+      - postgres
+volumes:
+  pgdata:
+      external: false

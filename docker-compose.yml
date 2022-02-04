@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+  app:
+    container_name: app
+    external_links:
+      - postgres
+    depends_on:
+      - postgres
