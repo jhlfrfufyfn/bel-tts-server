@@ -1,11 +1,11 @@
 version: "3.7"
 services:
-  postgres:
-    container_name: postgres
-    image: postgres
-  app:
-    container_name: app
+  postgres-tts:
+    container_name: postgres-tts
+    image: postgres-tts
+  tts-app:
+    container_name: tts-app
     external_links:
-      - postgres
+      - postgres-tts
     depends_on:
-      - postgres
+      - postgres-tts
