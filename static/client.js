@@ -1,6 +1,6 @@
 const button = document.getElementById('submit-text');
 
-const hostname = 'localhost:3000'
+const hostname = 'nikuchin.fun';
 button.addEventListener("click", function (e) {
     const submitted_text = document.getElementById('submitting_form').value;
     axios({
