@@ -10,7 +10,8 @@
     "start": "npm run dev",
     "test": "jest",
     "lint": "eslint .",
-    "fix": "eslint . --fix"
+    "fix": "eslint . --fix",
+    "prod": "node build/server.js"
   },
   "keywords": [],
   "author": "Nik Chinuk",

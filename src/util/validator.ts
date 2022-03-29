@@ -4,31 +4,31 @@ import { validationResult, ValidationChain } from 'express-validator';
 
 // parallel processing
 export const validateParallel = (validations: ValidationChain[]) => {
-  return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    await Promise.all(validations.map(validation => validation.run(req)));
+  return async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    await Promise.all(validations.map(validation => validation.run(request)));
 
-    const errors = validationResult(req);
+    const errors = validationResult(request);
     if (errors.isEmpty()) {
       return next();
     }
 
-    res.status(400).json({ errors: errors.array() });
+    response.status(400).json({ errors: errors.array() });
   };
 };
 
 // sequential processing, stops running validations chain if the previous one have failed.
 export const validateSequantial = (validations: ValidationChain[]) => {
-  return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    for (let validation of validations) {
-      const result = await validation.run(req);
-      if (result.array().length) break;
+  return async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    for (const validation of validations) {
+      const result = await validation.run(request);
+      if (result.array().length > 0) break;
     }
 
-    const errors = validationResult(req);
+    const errors = validationResult(request);
     if (errors.isEmpty()) {
       return next();
     }
 
-    res.status(400).json({ errors: errors.array() });
+    response.status(400).json({ errors: errors.array() });
   };
 };

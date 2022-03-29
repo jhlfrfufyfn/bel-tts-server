@@ -1,7 +1,7 @@
 import express from 'express';
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 import { v4 as uuidv4 } from 'uuid';
-import path from 'path';
+import path from 'node:path';
 const router = express.Router();
 
 const model_path: string = process.env.MODEL_PATH || "model.pth.tar";
@@ -15,7 +15,7 @@ router.get('/', function (request: express.Request, response: express.Response) 
 });
 
 router.post('/', function (request: express.Request, response: express.Response) {
-    console.log(request)
+    console.log(request);
     const text: string = request.body.text;
     console.log("text: " + text);
     const filename = uuidv4() + ".wav";
@@ -23,9 +23,9 @@ router.post('/', function (request: express.Request, response: express.Response)
     console.log('before gen');
     const generate_audio = spawn('tts', ['--text', text, '--model_path', model_path, '--config_path', config_path, '--out_path', output_path]);
 
-    generate_audio.on('error', (err) => {
-      console.error('error: ' + err.message);
-    })
+    generate_audio.on('error', (error) => {
+      console.error('error: ' + error.message);
+    });
     generate_audio.stdout.on('data', (data) => {
       console.log('child output: \n' + data);
     });
@@ -38,7 +38,7 @@ router.post('/', function (request: express.Request, response: express.Response)
       console.log('child process exited with ' +
         `code ${code} and signal ${signal}`);
       if (signal === null) {
-        console.log('response is sent')
+        console.log('response is sent');
         response.end(JSON.stringify({audio_name: filename}));
       }
       else {

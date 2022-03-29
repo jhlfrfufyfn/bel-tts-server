@@ -1,18 +1,18 @@
 import http from 'node:http';
-import https from 'node:https';
-import fs from 'fs';
 import { app } from './app';
 
 // Get port from environment and store in Express.
 const port = process.env.PORT || '3000';
 // Create HTTP server.
 const server = http.createServer(app);
-server.listen(port)
+server.listen(port);
 console.log(`HTTP server listening on port ${port}`);
 
 
 // Get port from environment and store in Express.
 /*
+import https from 'node:https';
+
 if (process.env.NODE_ENV === "production") {
     const securePort = process.env.SECURE_PORT || '3433';
 

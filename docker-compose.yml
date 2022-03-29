@@ -5,6 +5,13 @@ services:
     image: postgres-tts
   tts-app:
     container_name: tts-app
+    environment:
+      - STATIC_PATH=/app/static
+      - AUDIO_PATH=/app/audio
+      - CONFIG_PATH=/app/tts-config/config.json
+      - MODEL_PATH=/app/tts-config/best_model_6370.pth.tar
+      - SECRET_KEY_PATH=/app/sslcert/server.key
+      - CERTIFICATE_PATH=/app/sslcert/server.crt
     external_links:
       - postgres-tts
     depends_on:

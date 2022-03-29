@@ -3,8 +3,9 @@ services:
   postgres-tts:
     container_name: postgres-tts
     image: postgres
-    restart: always
-    env_file: .env.prod
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=example
     volumes:
       - pgdata:/data/db
     ports:
@@ -12,13 +13,18 @@ services:
   tts-app:
     container_name: tts-app
     restart: always
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
     env_file: .env.prod
     ports:
-      - ${PORT}:80
+      - 3000:3000
     external_links:
       - postgres-tts
     depends_on:
       - postgres-tts
 volumes:
   pgdata:
+      external: false

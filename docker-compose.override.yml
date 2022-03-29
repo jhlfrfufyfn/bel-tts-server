@@ -3,9 +3,9 @@ services:
   postgres-tts:
     container_name: postgres-tts
     image: postgres
-    restart: always
+    restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=example=value
     volumes:
       - pgdata:/data/db
     ports:
@@ -16,9 +16,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    environment:
+      - NODE_ENV=development
     env_file: .env
     ports:
-      - ${PORT}:${PORT}
+      - 3000:3000
     volumes:
       - ./src:/app/src
       - ./static:/app/static

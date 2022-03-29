@@ -1,4 +1,4 @@
-FROM python:3.9-slim as builder
+FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y \
     software-properties-common \
@@ -18,26 +18,10 @@ RUN apt-get install libsndfile1 -y
 
 COPY package*.json ./
 
-RUN ["npm", "ci", "--production"]
+RUN npm ci --only=production && npm cache clean --force
 
 COPY . ./
 
 RUN mkdir audio
 
-CMD [ "npm", "run", "dev" ]
-
-
-FROM builder as runner
-
-WORKDIR /app
-
-COPY package.json ./
-RUN npm install --only=production
-
-COPY --from=builder /app/build /app/build
-COPY --from=builder /app/static /app/static
-COPY --from=builder /app/tts-config /app/tts-config
-
-RUN npm i -g pm2
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD [ "npm", "run", "prod" ]
