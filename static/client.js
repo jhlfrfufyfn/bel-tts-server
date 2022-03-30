@@ -1,6 +1,6 @@
 const button = document.getElementById('submit-text');
 
-const NODE_ENV = "development";
+const NODE_ENV = "production";
 
 const protocol = (NODE_ENV === "production") ? "https" : "http";
 const hostname = (NODE_ENV === "production") ? 'nikuchin.fun' : 'localhost:3000';

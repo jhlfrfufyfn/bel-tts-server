@@ -5,7 +5,7 @@ services:
     image: postgres
     restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD=example=value
+      - POSTGRES_PASSWORD=example
     volumes:
       - pgdata:/data/db
     ports:
