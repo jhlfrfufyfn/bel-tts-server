@@ -24,4 +24,6 @@ COPY . ./
 
 RUN mkdir audio
 
+RUN npm run build
+
 CMD [ "npm", "run", "prod" ]

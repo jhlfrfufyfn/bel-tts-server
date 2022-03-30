@@ -3,7 +3,7 @@ services:
   postgres-tts:
     container_name: postgres-tts
     image: postgres
-    restart: unless-stopped
+    restart: on-failure:5
     environment:
       - POSTGRES_PASSWORD=example
     volumes:
@@ -12,7 +12,7 @@ services:
       - 5433:5433
   tts-app:
     container_name: tts-app
-    restart: always
+    restart: on-failure:5
     build:
       context: .
       dockerfile: Dockerfile
