@@ -10,7 +10,8 @@
     "start": "npm run dev",
     "test": "jest",
     "lint": "eslint .",
-    "fix": "eslint . --fix"
+    "fix": "eslint . --fix",
+    "prod": "node build/server.js"
   },
   "keywords": [],
   "author": "Nik Chinuk",
@@ -18,8 +19,10 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
     "@types/compression": "^1.7.2",
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.0",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "eslint": "^8.8.0",
@@ -36,7 +39,12 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "compression": "^1.7.4",
-    "express": "^4.17.2"
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "pug": "^3.0.2",
+    "uuid": "^8.3.2"
   }
 }

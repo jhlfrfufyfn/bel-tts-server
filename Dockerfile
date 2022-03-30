@@ -1,29 +1,27 @@
-FROM node:16-alpine3.15 as builder
+FROM python:3.9-slim
+
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    npm
+
+RUN apt-get install -y curl
+
+RUN npm install npm@latest -g && \
+    npm install n -g && \
+    n latest
 
 WORKDIR /app
 
-COPY package.json ./
-COPY tsconfig.json ./
-COPY src ./src
+RUN pip install 'tts==0.4.1'
 
-RUN ls -a
-RUN npm install
-RUN npm run build
+RUN apt-get install libsndfile1 -y
 
+COPY package*.json ./
 
-RUN ["npm", "ci", "--production"]
+RUN npm ci --only=production && npm cache clean --force
+
 COPY . ./
-RUN npm run build
 
+RUN mkdir audio
 
-FROM node:16-alpine3.15 as runner
-
-WORKDIR /app
-
-COPY package.json ./
-RUN npm install --only=production
-
-COPY --from=builder /app/build /app/build
-RUN npm i -g pm2
-EXPOSE 3000
-CMD ["pm2-runtime", "build/servet.js"]
+CMD [ "npm", "run", "prod" ]
