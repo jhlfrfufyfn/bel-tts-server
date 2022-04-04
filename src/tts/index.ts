@@ -5,17 +5,15 @@ import path from 'node:path';
 const router = express.Router();
 
 const model_path: string = process.env.MODEL_PATH || "model.pth.tar";
-const config_path = process.env.CONFIG_PATH || "config.json";
-const audio_path = process.env.AUDIO_PATH || "audio";
-const static_path = process.env.STATIC_PATH || "static";
+const config_path: string = process.env.CONFIG_PATH || "config.json";
+const audio_path: string = process.env.AUDIO_PATH || "audio";
+const static_path: string = process.env.STATIC_PATH || "static";
 // define the home page route
 router.get('/', function (request: express.Request, response: express.Response) {
-  console.log('get test');
   response.sendFile(path.join(static_path, 'tts.html'));
 });
 
 router.post('/', function (request: express.Request, response: express.Response) {
-    console.log(request);
     const text: string = request.body.text;
     console.log("text: " + text);
     const filename = uuidv4() + ".wav";
@@ -42,6 +40,7 @@ router.post('/', function (request: express.Request, response: express.Response)
         response.end(JSON.stringify({audio_name: filename}));
       }
       else {
+        console.error('ERROR');
         response.sendStatus(500);
       }
     });
