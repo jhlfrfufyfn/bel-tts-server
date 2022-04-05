@@ -15,6 +15,9 @@ app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.all('/', (req, res) => {
+    res.redirect("/tts");
+})
 app.use('/tts', ttsRouter);    
 
 export { app };
