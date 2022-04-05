@@ -14,13 +14,14 @@
             <textarea rows="10" placeholder="Прывітанне! Увядзіце свой тэкст, каб агучыць яго, і клікніце на кнопку, ці проста клікніце на кнопку ніжэй." id="submitting_form" class="text-form"></textarea>
             <button type="button" id="submit-text">Агучыць!</button>
         </form>
-    <div class="loader" style="display: none;"></div>
-    <div class="alert">
-        #
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <div class="loader" style="display: none;"></div>
+        <div class="alert">
+            #
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+        <div class="compare-info">Для параўнання — версія ад Нацыянальнай Акадэміі Навук <a href="https://corpus.by/TextToSpeechSynthesizer/">тут</a></div>
     </div>
-    </div>
-</body>
+    </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="module" src="client.js"></script>
 </html>
