@@ -18,6 +18,10 @@ app.use(express.json());
 app.all('/', (req, res) => {
     res.redirect("/tts");
 })
+
+app.get('/nan', (req, res) => {
+    res.redirect('https://corpus.by/TextToSpeechSynthesizer/');
+})
 app.use('/tts', ttsRouter);    
 
 export { app };
