@@ -12,7 +12,7 @@ RUN npm install npm@latest -g && \
 
 WORKDIR /app
 
-RUN pip install 'tts==0.4.1'
+RUN pip install 'tts==0.6.2'
 
 RUN apt-get install libsndfile1 -y
 
