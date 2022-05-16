@@ -12,20 +12,18 @@ RUN npm install npm@latest -g && \
 
 WORKDIR /app
 
-RUN pip install 'tts==0.6.2'
-
 RUN apt-get install libsndfile1 -y
+
+RUN git clone -b deployment --single-branch https://github.com/jhlfrfufyfn/bel-tts.git
+
+RUN cd bel-tts && make install && cd ..
 
 COPY package*.json ./
 
-RUN npm ci --only=production && npm cache clean --force
-
-RUN npm i -D typescript
+RUN npm install
 
 COPY . ./
 
 RUN mkdir audio
 
-RUN npm run build
-
-CMD [ "npm", "run", "prod" ]
+CMD [ "npm", "run", "dev" ]
