@@ -24,7 +24,6 @@ services:
       - ./src:/app/src
       - ./static:/app/static
       - ./tts-config:/app/tts-config
-      - ~/audio:/app/audio
     external_links:
       - postgres-tts
     depends_on:
