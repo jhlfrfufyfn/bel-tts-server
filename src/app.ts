@@ -1,9 +1,11 @@
 import express from "express";
 import compression from "compression";
 import cors from 'cors';
-
+import path from 'node:path';
 
 import ttsRouter from './tts';
+
+const staticPath: string = process.env.STATIC_PATH || "/app";
 
 const app = express();
 
@@ -21,6 +23,10 @@ app.all('/', (req, res) => {
 
 app.get('/nan', (req, res) => {
     res.redirect('https://corpus.by/TextToSpeechSynthesizer/');
+})
+
+app.get('/examples', (req, res) => {
+    res.sendFile(path.join(staticPath, 'examples.html'));
 })
 app.use('/tts', ttsRouter);    
 
