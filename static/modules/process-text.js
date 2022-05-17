@@ -2,7 +2,7 @@ const defaultText = "Прывітанне! Увядзіце свой тэкст,
 const allowedCharacters = "АБВГДЕЁЖЗІЙКЛМНОПРСТУЎФХЦЧШЫЬЭЮЯабвгдеёжзійклмнопрстуўфхцчшыьэюя!'(),-.:;? ";
 
 export function processText(text) {
-    if (text.length > 300) {
+    if (text.length > 1500) {
         return { error: true, text: "too long" };
     }
     if (text.length === 0) {
