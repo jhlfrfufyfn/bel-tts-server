@@ -1,5 +1,5 @@
 const defaultText = "Прывітанне! Увядзіце свой тэкст, каб агучыць яго, і клікніце на кнопку, ці проста клікніце на кнопку ніжэй.";
-const allowedCharacters = "АБВГДЕЁЖЗІЙКЛМНОПРСТУЎФХЦЧШЫЬЭЮЯабвгдеёжзійклмнопрстуўфхцчшыьэюя!'(),-.:;? ";
+const allowedCharacters = "АБВГДЕЁЖЗІЙКЛМНОПРСТУЎФХЦЧШЫЬЭЮЯабвгдеёжзійклмнопрстуўфхцчшыьэюя!'(),-.:;? –";
 
 export function processText(text) {
     if (text.length > 1500) {
@@ -13,7 +13,7 @@ export function processText(text) {
 
     let badCharacters = "";
     for (const symbol of text) {
-        if (allowedCharacters.search(symbol) === -1) {
+        if (allowedCharacters.search(`\\${symbol}`) === -1) {
             badCharacters += symbol;
         }
     }
