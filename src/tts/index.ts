@@ -27,7 +27,7 @@ router.post('/', async function (request: express.Request, response: express.Res
     try {
         // Send request to the phonemizer
         console.log("Sending text to phonemizer...");
-        const phonemizerResponse = await axios.post('http://localhost:8080/processText', text, {
+        const phonemizerResponse = await axios.post('http://fonemizer:8080/processText', text, {
           headers: { 'Content-Type': 'text/plain' }
         });
         const phonemizedText: string = phonemizerResponse.data.trim();
