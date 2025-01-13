@@ -69,7 +69,7 @@ router.post('/', async function (request: express.Request, response: express.Res
             response.sendStatus(500);
           }
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error contacting the phonemizer or generating audio: ", error.message);
         response.status(500).json({ error: "Failed to process text or generate audio" });
     }
