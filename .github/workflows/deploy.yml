@@ -22,7 +22,7 @@ jobs:
         script: rm -r /home/${{ secrets.USERNAME }}/bel-tts-server/*
 
     - name: Copy repository contents via scp
-      uses: appleboy/scp-action@0.1.4
+      uses: appleboy/scp-action@v0.1.4
       with:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
